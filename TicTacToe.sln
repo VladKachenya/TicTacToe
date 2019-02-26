@@ -3,9 +3,35 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TicTacToe.App", "TicTacToe.App", "{8B3CCF25-7A22-40A2-BDC7-06670D2F7D85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.App", "TicTacToe.App\TicTacToe.App\TicTacToe.App.csproj", "{6DD67D67-A042-4B97-8125-D1CDE55619AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TicTacToe.Logics", "TicTacToe.Logics", "{BA00AD0C-0907-47BB-8A56-BF49C7C3068F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.Logics", "TicTacToe.Logics\TicTacToe.Logics\TicTacToe.Logics.csproj", "{34342BA5-C044-4A85-9D5F-63B0708F6A92}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DD67D67-A042-4B97-8125-D1CDE55619AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DD67D67-A042-4B97-8125-D1CDE55619AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DD67D67-A042-4B97-8125-D1CDE55619AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DD67D67-A042-4B97-8125-D1CDE55619AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34342BA5-C044-4A85-9D5F-63B0708F6A92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34342BA5-C044-4A85-9D5F-63B0708F6A92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34342BA5-C044-4A85-9D5F-63B0708F6A92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34342BA5-C044-4A85-9D5F-63B0708F6A92}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6DD67D67-A042-4B97-8125-D1CDE55619AE} = {8B3CCF25-7A22-40A2-BDC7-06670D2F7D85}
+		{34342BA5-C044-4A85-9D5F-63B0708F6A92} = {BA00AD0C-0907-47BB-8A56-BF49C7C3068F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6BD001DE-1892-4B47-AB74-4D9815E2E98D}
