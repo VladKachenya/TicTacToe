@@ -3,17 +3,59 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
         xmlns:local="clr-namespace:TicTacToe.App"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="250" Width="200"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        Height="245" Width="183"
+        ResizeMode="NoResize"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        Icon="Resources/tic-tac-toe.png">
+    <Window.Resources>
+        <Style TargetType="Image" x:Key="XOImageStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Value}"
+                             Value ="True">
+                    <Setter Property="Source" Value="Resources/cross.png" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Value}"
+                             Value ="False">
+                    <Setter Property="Source" Value="Resources/circle.png" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Value}"
+                             Value ="{x:Null}">
+                    <Setter Property="Source" Value="{x:Null}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Image" x:Key="MoveStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsX}"
+                             Value ="True">
+                    <Setter Property="Source" Value="Resources/cross.png" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsX}"
+                             Value ="False">
+                    <Setter Property="Source" Value="Resources/circle.png" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ItemsControl ItemsSource="{Binding XOsVievModels}" Grid.Row="1" Name ="XOsList">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Restart" Margin="5" Height="30" Command="{Binding RestartCommand}"/>
+            </StackPanel>
+            <Image Style="{StaticResource MoveStyle}"
+                   Height="20" Width="20" Grid.Column="1" Margin="5"/>
+        </Grid>
+        <ItemsControl ItemsSource="{Binding XOsVievModels}" Grid.Row="1" Name ="XOsList" Margin="5">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel/>
@@ -21,11 +63,10 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderThickness="5" CornerRadius="5">
-                        <Button Height="45" Command="{Binding ElementName=XOsList, Path=DataContext.MoveCommand}"
-                                CommandParameter="{Binding .}" Width="45" Background="AntiqueWhite">
-                            <!--<ContentPresenter Content="Resources/close.png" />-->
-                            <Image Source="Resources/close.png"></Image>
+                    <Border BorderThickness="1" BorderBrush="Gray">
+                        <Button Height="50" Command="{Binding ElementName=XOsList, Path=DataContext.MoveCommand}"
+                                CommandParameter="{Binding .}" Width="50" Background="AntiqueWhite">
+                            <Image Style="{StaticResource XOImageStyle}"/>
                         </Button>
                     </Border>
                 </DataTemplate>

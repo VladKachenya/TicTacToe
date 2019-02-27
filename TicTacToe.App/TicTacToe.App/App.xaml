@@ -2,7 +2,7 @@
              xmlns:viewModel="clr-namespace:TicTacToe.Logics.ViewModel;assembly=TicTacToe.Logics">
   <Application.Resources>
     <ResourceDictionary>
-      <viewModel:ViewModelLocator x:Key="Locator" />
+      <viewModel:ViewModelLocator x:Key="Locator"></viewModel:ViewModelLocator>
     </ResourceDictionary>
   </Application.Resources>
 </Application>

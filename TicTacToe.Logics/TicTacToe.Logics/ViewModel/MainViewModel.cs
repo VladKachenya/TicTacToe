@@ -21,6 +21,7 @@ namespace TicTacToe.Logics.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private readonly IXOsVievModelFactory _xOsVievModelFactory;
+        private bool _isX;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -29,7 +30,8 @@ namespace TicTacToe.Logics.ViewModel
         {
             _xOsVievModelFactory = xOsVievModelFactory;
             XOsVievModels = _xOsVievModelFactory.CreateXoCollection();
-            MoveCommand = new RelayCommand<IXOsVievModel>(OnMoveCommand, CanMove());
+            MoveCommand = new RelayCommand<IXOsVievModel>(OnMoveCommand);
+            RestartCommand = new RelayCommand(OnResetCommand);
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -40,11 +42,18 @@ namespace TicTacToe.Logics.ViewModel
             ////}
         }
 
+
         public RelayCommand<IXOsVievModel> MoveCommand { get; }
+        public RelayCommand RestartCommand { get; }
 
-        public ObservableCollection<IXOsVievModel> XOsVievModels { get; set; }
 
-        public string Title => "Hello TicTacToe Game";
+        public ObservableCollection<IXOsVievModel> XOsVievModels { get;}
+
+        public bool IsX
+        {
+            get => _isX;
+            set =>  Set(ref _isX, value);
+        }
 
         #region private methods
 
@@ -52,15 +61,20 @@ namespace TicTacToe.Logics.ViewModel
         {
             if (osVievModel.Value == null)
             {
-                osVievModel.SetXorO(true);
+                osVievModel.SetXorO(IsX);
+                IsX = !IsX;
             }
         }
 
-        private bool CanMove()
+        private void OnResetCommand()
         {
-            return true;
-        }
+            foreach (var xOsVievModel in XOsVievModels)
+            {
+                xOsVievModel.ResetValue();
+            }
 
+            IsX = true;
+        }
         #endregion
     }
 }

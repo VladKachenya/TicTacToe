@@ -117,10 +117,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\cross.png" />
+    <Resource Include="Resources\circle.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\circle.png" />
+    <Resource Include="Resources\tic-tac-toe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cross.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
