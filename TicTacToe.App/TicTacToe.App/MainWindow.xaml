@@ -8,7 +8,8 @@
         Height="245" Width="183"
         ResizeMode="NoResize"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
-        Icon="Resources/tic-tac-toe.png">
+        Icon="Resources/tic-tac-toe.png"
+        >
     <Window.Resources>
         <Style TargetType="Image" x:Key="XOImageStyle">
             <Style.Triggers>
@@ -24,6 +25,19 @@
                              Value ="{x:Null}">
                     <Setter Property="Source" Value="{x:Null}" />
                 </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Button" x:Key="ButtonWinnerStyle">
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding ElementName=XOsList, Path=DataContext.HaveWinner}" Value="True"/>
+                        <Condition Binding="{Binding IsWinner}" Value="False"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
             </Style.Triggers>
         </Style>
         <Style TargetType="Image" x:Key="MoveStyle">
@@ -50,7 +64,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal">
-                <Button Content="Restart" Margin="5" Height="30" Command="{Binding RestartCommand}"/>
+                <Button Content="Restart" Margin="5" Padding="5" Height="25" Command="{Binding RestartCommand}"/>
             </StackPanel>
             <Image Style="{StaticResource MoveStyle}"
                    Height="20" Width="20" Grid.Column="1" Margin="5"/>
@@ -65,7 +79,8 @@
                 <DataTemplate>
                     <Border BorderThickness="1" BorderBrush="Gray">
                         <Button Height="50" Command="{Binding ElementName=XOsList, Path=DataContext.MoveCommand}"
-                                CommandParameter="{Binding .}" Width="50" Background="AntiqueWhite">
+                                CommandParameter="{Binding .}" Width="50" Background="#47ff66"
+                                Style="{StaticResource ButtonWinnerStyle}">
                             <Image Style="{StaticResource XOImageStyle}"/>
                         </Button>
                     </Border>

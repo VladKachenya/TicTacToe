@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using TicTacToe.Logics.Interfaces.Services;
 using TicTacToe.Logics.Interfaces.ViewModel;
 using TicTacToe.Logics.Interfaces.ViewModelFactories;
 
@@ -21,14 +22,18 @@ namespace TicTacToe.Logics.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private readonly IXOsVievModelFactory _xOsVievModelFactory;
-        private bool _isX;
+        private readonly ITicTacToeProcessor _ticTacToeProcessor;
+        private bool _isX = true;
+        private bool _haveWinner = false;
+
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(IXOsVievModelFactory xOsVievModelFactory )
+        public MainViewModel(IXOsVievModelFactory xOsVievModelFactory, ITicTacToeProcessor ticTacToeProcessor)
         {
             _xOsVievModelFactory = xOsVievModelFactory;
+            _ticTacToeProcessor = ticTacToeProcessor;
             XOsVievModels = _xOsVievModelFactory.CreateXoCollection();
             MoveCommand = new RelayCommand<IXOsVievModel>(OnMoveCommand);
             RestartCommand = new RelayCommand(OnResetCommand);
@@ -55,6 +60,12 @@ namespace TicTacToe.Logics.ViewModel
             set =>  Set(ref _isX, value);
         }
 
+        public bool HaveWinner
+        {
+            get => _haveWinner;
+            set =>Set(ref _haveWinner, value);
+        }
+
         #region private methods
 
         private void OnMoveCommand(IXOsVievModel osVievModel)
@@ -62,6 +73,10 @@ namespace TicTacToe.Logics.ViewModel
             if (osVievModel.Value == null)
             {
                 osVievModel.SetXorO(IsX);
+                if (_ticTacToeProcessor.CheckWinner(XOsVievModels) != null)
+                {
+                    HaveWinner = true;
+                }
                 IsX = !IsX;
             }
         }
@@ -74,6 +89,7 @@ namespace TicTacToe.Logics.ViewModel
             }
 
             IsX = true;
+            HaveWinner = false;
         }
         #endregion
     }

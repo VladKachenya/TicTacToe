@@ -15,8 +15,10 @@
 using System;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
+using TicTacToe.Logics.Interfaces.Services;
 using TicTacToe.Logics.Interfaces.ViewModel;
 using TicTacToe.Logics.Interfaces.ViewModelFactories;
+using TicTacToe.Logics.Services;
 using TicTacToe.Logics.ViewModelFactories;
 
 namespace TicTacToe.Logics.ViewModel
@@ -51,7 +53,7 @@ namespace TicTacToe.Logics.ViewModel
             {
                 return () => new XOsVievModel();
             });
-
+            SimpleIoc.Default.Register<ITicTacToeProcessor, TicTacToeProcessor>();
         }
 
         public MainViewModel Main

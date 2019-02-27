@@ -4,6 +4,9 @@
     {
         bool? Value { get; }
 
+        bool IsWinner { get; set; }
+
+
         void SetXorO(bool isX);
 
         void ResetValue();
